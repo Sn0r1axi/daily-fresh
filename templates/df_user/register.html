@@ -12,6 +12,110 @@
 	var error_email = false;
 	var error_check = false;
 
+	
+	var data = {
+		"北京市": {
+			"市辖区": ["东城区", "西城区", "朝阳区", "丰台区", "石景山区", "海淀区", "门头沟区", "房山区", "通州区", "顺义区", "昌平区", "大兴区", "怀柔区", "平谷区", "密云区", "延庆区"]
+		},
+		"河北省": {
+			"石家庄市": ["长安区", "桥西区", "新华区", "井陉矿区", "裕华区", "藁城区", "鹿泉区", "栾城区", "井陉县", "正定县", "行唐县", "灵寿县", "高邑县", "深泽县", "赞皇县", "无极县", "平山县", "元氏县", "赵县", "石家庄高新技术产业开发区", "石家庄循环化工园区", "辛集市", "晋州市", "新乐市"],
+			"唐山市": ["路南区", "路北区", "古冶区", "开平区", "丰南区", "丰润区", "曹妃甸区", "滦县", "滦南县", "乐亭县", "迁西县", "玉田县", "唐山市芦台经济技术开发区", "唐山市汉沽管理区", "唐山高新技术产业开发区", "河北唐山海港经济开发区", "遵化市", "迁安市"],
+			"秦皇岛市": ["海港区", "山海关区", "北戴河区", "抚宁区", "青龙满族自治县", "昌黎县", "卢龙县", "秦皇岛市经济技术开发区", "北戴河新区"],
+			"邯郸市": ["邯山区", "丛台区", "复兴区", "峰峰矿区", "肥乡区", "永年区", "临漳县", "成安县", "大名县", "涉县", "磁县", "邱县", "鸡泽县", "广平县", "馆陶县", "魏县", "曲周县", "邯郸经济技术开发区", "邯郸冀南新区", "武安市"],
+			"衡水市": ["桃城区", "冀州区", "枣强县", "武邑县", "武强县", "饶阳县", "安平县", "故城县", "景县", "阜城县", "河北衡水经济开发区", "衡水滨湖新区", "深州市"]
+		},
+		"湖南省": {
+			"长沙市": ["芙蓉区", "天心区", "岳麓区", "开福区", "雨花区", "望城区", "长沙县", "浏阳市", "宁乡市"],
+			"株洲市": ["荷塘区", "芦淞区", "石峰区", "天元区", "株洲县", "攸县", "茶陵县", "炎陵县", "云龙示范区", "醴陵市"],
+			"湘潭市": ["雨湖区", "岳塘区", "湘潭县", "湖南湘潭高新技术产业园区", "湘潭昭山示范区", "湘潭九华示范区", "湘乡市", "韶山市"],
+			"衡阳市": ["珠晖区", "雁峰区", "石鼓区", "蒸湘区", "南岳区", "衡阳县", "衡南县", "衡山县", "衡东县", "祁东县", "衡阳综合保税区", "湖南衡阳高新技术产业园区", "湖南衡阳松木经济开发区", "耒阳市", "常宁市"],
+		},
+		"广东省": {
+			"广州市": ["荔湾区", "越秀区", "海珠区", "天河区", "白云区", "黄埔区", "番禺区", "花都区", "南沙区", "从化区", "增城区"],
+			"韶关市": ["武江区", "浈江区", "曲江区", "始兴县", "仁化县", "翁源县", "乳源瑶族自治县", "新丰县", "乐昌市", "南雄市"],
+			"深圳市": ["罗湖区", "福田区", "南山区", "宝安区", "龙岗区", "盐田区", "龙华区", "坪山区"],
+			"珠海市": ["香洲区", "斗门区", "金湾区"],
+		},
+		"江苏省": {
+			//按笔画排序补全
+			"南京市": ["玄武区", "秦淮区", "建邺区", "鼓楼区", "浦口区", "栖霞区", "雨花台区", "江宁区", "六合区", "溧水区", "高淳区"],
+			"无锡市": ["锡山区", "惠山区", "滨湖区", "梁溪区", "新吴区", "江阴市", "宜兴市"],
+			"徐州市": ["鼓楼区", "云龙区", "贾汪区", "泉山区", "铜山区", "丰县", "沛县", "睢宁县", "新沂市", "邳州市"],
+			"常州市": ["天宁区", "钟楼区", "新北区", "武进区", "金坛区", "溧阳市"],
+			"苏州市": ["姑苏区", "虎丘区", "吴中区", "相城区", "吴江区", "常熟市", "张家港市", "昆山市", "太仓市"],
+			"南通市": ["崇川区", "港闸区", "通州区", "海安县", "如东县", "启东市", "如皋市", "海门市"],
+			"连云港市": ["连云区", "海州区", "赣榆区", "东海县", "灌云县", "灌南县"],
+			"淮安市": ["淮安区", "淮阴区", "清江浦区", "洪泽区", "涟水县", "盱眙县", "金湖县"],
+			"盐城市": ["亭湖区", "盐都区", "大丰区", "响水县", "滨海县", "阜宁县", "射阳县", "建湖县", "东台市"],
+			"扬州市": ["广陵区", "邗江区", "江都区", "宝应县", "仪征市", "高邮市"],
+			"镇江市": ["京口区", "润州区", "丹徒区", "丹阳市", "扬中市", "句容市"],
+			"泰州市": ["海陵区", "高港区", "姜堰区", "兴化市", "靖江市", "泰兴市"],
+			"宿迁市": ["宿城区", "宿豫区", "沭阳县", "泗阳县", "泗洪县"]
+		}
+	};
+	//简单的三级联动
+	var eProvince = document.getElementById('province');
+	var eCity = document.getElementById('city');
+	var eCounty = document.getElementById('district');
+
+	for(let k in data){
+		//创建option元素
+		let eOption = document.createElement('option');
+		//设置option元素的值为数据中“省”的名称
+		eOption.value = k;
+		eOption.innerHTML = k;
+		//把option依次加入到eProvince下拉框中
+		eProvince.appendChild(eOption);
+	}
+
+	eProvince.addEventListener('change',event=>{
+		//获取当前选择的省份值
+		let value = eProvince.value;
+		//修改省份后，城市和区/县下拉框中原有的值都会修改，直接通过修改eCity和eCounty元素innerHTML来初始化值
+		eCity.innerHTML = eCounty.innerHTML = '<option value="">请选择</option>';
+		//判断是否选择了省份
+		if(value!=''){
+		  	//在数据中遍历省份对应的城市
+			for(let k in data[value]){
+				//创建option元素
+				let eOption = document.createElement('option');
+				//设置option元素的值为数据中“城市”的名称
+				eOption.value = k;
+				eOption.innerHTML = k;
+				//把option依次加入到eCity下拉框中
+				eCity.appendChild(eOption);
+			}
+		}
+	});
+
+	
+	//城市改变时，把对应的数据放到区/县下拉框中
+	eCity.addEventListener('change',event=>{
+	//获取已选择的省份值
+	let sProvince = eProvince.value;
+	//获取当前选择的城市值
+	let sCity = eCity.value;
+	//找到对应城市数据
+	let arr = data[sProvince][sCity];
+	//初始化eCounty元素中原有的值
+	eCounty.innerHTML = '<option value="">请选择</option>';
+	//判断是否选择的是城市名，而不是选择“请选择”
+	if(sCity!=''){
+		//遍历城市中对应的区/县数据
+		for(let i=0;i<arr.length;i++){
+		//创建option元素
+		let eOption = document.createElement('option');
+		//设置option元素的值为数据中“区/县”的名称
+		eOption.value = arr[i];
+		eOption.innerHTML = arr[i];
+		//把option依次加入到eCounty下拉框中
+		eCounty.appendChild(eOption);
+		}
+	}
+	});
+
+
+
 
 	$('#user_name').blur(function() {
 		check_user_name();
@@ -23,6 +127,10 @@
 
 	$('#cpwd').blur(function() {
 		check_cpwd();
+	});
+
+	$('#phone_num').blur(function() {
+		check_phone();
 	});
 
 	$('#email').blur(function() {
@@ -47,16 +155,27 @@
 	function check_user_name(){
 		var len = $('#user_name').val().length;
 
-		if(len<5||len>20)
+		if(len<1)
 		{
-			$('#user_name').next().html('输入5-20个字符的用户名');
+			$('#user_name').next().html('用户名不能为空');
 			$('#user_name').next().show();
 			error_name = true;
 
 		}
 		else
+
+		if(len>20)
+			{
+				$('#user_name').next().html('用户名不能超过20个字符');
+				$('#user_name').next().show();
+				error_name = true;
+	
+			}
+			else
+
+
 		{
-			$.get('{% url "df_user:register_exist" %}?uname='+$('#user_name').val(),function(data){
+			$.get('/user/register_exist/?uname='+$('#user_name').val(),function(data){
                 if (data.count >= 1) {
                     $('#user_name').next().html('用户名已经存在').show();
                     error_name = true;
@@ -70,17 +189,26 @@
 
 	function check_pwd(){
 		var len = $('#pwd').val().length;
-		if(len<4||len>20)
+		if(len<6||len>10)
 		{
-			$('#pwd').next().html('密码最少4位，最长20位');
+			$('#pwd').next().html('密码最少6位，最长10位');
 			$('#pwd').next().show();
 			error_password = true;
 		}
-		else
+		else 
 		{
-			$('#pwd').next().hide();
-			error_password = false;
-		}
+			var re = /[0-9]/;
+			var re2 = /[a-zA-Z]/;
+			if (!re.test($('#pwd').val()) || !re2.test($('#pwd').val())) {
+				$('#pwd').next().html('密码必须包含字母和数字');
+				$('#pwd').next().show();
+				error_password = true;
+			}
+			else{
+				$('#pwd').next().hide();
+				error_password = false;
+			}
+		}	
 	}
 
 
@@ -98,6 +226,24 @@
 		{
 			$('#cpwd').next().hide();
 			error_check_password = false;
+		}
+
+	}
+
+	//验证手机号是否为11位
+	function check_phone(){
+		var re = /^1[34578]\d{9}$/;  //匹配以1开头，第二位是3、4、5、7或8，共计11位数字。
+
+		if(re.test($('#phone_num').val()))
+		{
+			$('#phone_num').next().hide();
+			error_phone = false;
+		}
+		else
+		{
+			$('#phone_num').next().html('你输入的手机号格式不正确');
+			$('#phone_num').next().show();
+			error_phone = true;
 		}
 
 	}
@@ -124,6 +270,7 @@
 		check_user_name();
 		check_pwd();
 		check_cpwd();
+		check_phone();
 		check_email();
 
 		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
@@ -141,7 +288,8 @@
 {% endblock head %}
 
 {% block body %}
-	<div class="register_con">
+	<div class="register_con" style="
+    height: 860px;">
 		<div class="l_con fl">
 			<a class="reg_logo"><img src="/static/images/logo02.png"></a>
 			<div class="reg_slogan">足不出户  ·  新鲜每一天</div>
@@ -173,10 +321,55 @@
 						<span class="error_tip">提示信息</span>
 					</li>
 					<li>
+						<label>手机号码:</label>
+						<input type="text" name="phone_num" id="phone_num">
+						<span class="error_tip">提示信息</span>
+					</li>
+					<li>
 						<label>邮箱:</label>
 						<input type="text" name="email" id="email">
 						<span class="error_tip">提示信息</span>
 					</li>
+
+					<!-- more info -->
+					<li>
+						<label>出生日期:</label>
+							<input type="date" name="birthday" id="birthday">
+					</li>
+					<li>
+						<label>出生地:</label>
+						<div style="align-items: left; height: 80px; text-align:left; line-height: 40px;">
+							<select name="province" id="province">
+								<option value="">请选择省</option>
+								<!-- 省份选项 -->
+							</select>
+							<select name="city" id="city">
+								<option value="">请选择市</option>
+								<!-- 城市选项 -->
+							</select>
+							<select name="district" id="district">
+								<option value="">请选择区/县</option>
+								<!-- 区县选项 -->
+							</select>
+						</div>
+					</li>
+					<li>
+						<label>性别:</label>
+						<label><input type="radio" name="gender" value="male" style="width: 20px;">&nbsp;男</label>
+						<label><input type="radio" name="gender" value="female" style="width: 20px;">&nbsp;女</label>
+						<label><input type="radio" name="gender" value="other" style="width: 20px;">&nbsp;其他</label>
+					</li>
+					<li style="width: 500px;">
+						<label>爱好:</label>
+						<label><input type="checkbox" name="hobbies" value="reading" style="width: 20px;">&nbsp;阅读</label>
+						<label><input type="checkbox" name="hobbies" value="music" style="width: 20px;">&nbsp;音乐</label>
+						<label><input type="checkbox" name="hobbies" value="sports" style="width: 20px;">&nbsp;运动</label>
+						<label><input type="checkbox" name="hobbies" value="coding" style="width: 20px;">&nbsp;编程</label>
+						<label><input type="checkbox" name="hobbies" value="travel" style="width: 20px;">&nbsp;旅行</label>
+					</li>
+
+
+
 					<li class="agreement">
 						<input type="checkbox" name="allow" id="allow" checked="checked">
 						<label>同意《天天生鲜用户使用协议》</label>

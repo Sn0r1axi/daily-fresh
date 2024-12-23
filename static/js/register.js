@@ -41,14 +41,25 @@ $(function(){
 	function check_user_name(){
 		var len = $('#user_name').val().length;
 
-		if(len<5||len>20)
+		if(len<1)
 		{
-			$('#user_name').next().html('输入5-20个字符的用户名');
+			$('#user_name').next().html('用户名不能为空');
 			$('#user_name').next().show();
 			error_name = true;
 
 		}
 		else
+
+		if(len>20)
+			{
+				$('#user_name').next().html('用户名不能超过20个字符');
+				$('#user_name').next().show();
+				error_name = true;
+	
+			}
+			else
+
+
 		{
 			$.get('/user/register_exist/?uname='+$('#user_name').val(),function(data){
                 if (data.count >= 1) {
@@ -64,17 +75,26 @@ $(function(){
 
 	function check_pwd(){
 		var len = $('#pwd').val().length;
-		if(len<4||len>20)
+		if(len<6||len>10)
 		{
-			$('#pwd').next().html('密码最少4位，最长20位');
+			$('#pwd').next().html('密码最少6位，最长10位');
 			$('#pwd').next().show();
 			error_password = true;
 		}
-		else
+		else 
 		{
-			$('#pwd').next().hide();
-			error_password = false;
-		}		
+			var re = /[0-9]/;
+			var re2 = /[a-zA-Z]/;
+			if (!re.test($('#pwd').val()) || !re2.test($('#pwd').val())) {
+				$('#pwd').next().html('密码必须包含字母和数字');
+				$('#pwd').next().show();
+				error_password = true;
+			}
+			else{
+				$('#pwd').next().hide();
+				error_password = false;
+			}
+		}	
 	}
 
 
@@ -94,6 +114,24 @@ $(function(){
 			error_check_password = false;
 		}		
 		
+	}
+
+	//验证手机号是否为11位
+	function check_phone(){
+		var re = /^1[34578]\d{9}$/;
+
+		if(re.test($('#phone_num').val()))
+		{
+			$('#phone_num').next().hide();
+			error_phone = false;
+		}
+		else
+		{
+			$('#phone_num').next().html('你输入的手机号格式不正确');
+			$('#phone_num').next().show();
+			error_phone = true;
+		}
+
 	}
 
 	function check_email(){
@@ -118,6 +156,7 @@ $(function(){
 		check_user_name();
 		check_pwd();
 		check_cpwd();
+		check_phone();
 		check_email();
 
 		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)

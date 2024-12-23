@@ -2,7 +2,7 @@
 
 **天天生鲜**：小型电商购物网站，基于<code>Python3.x</code>和<code>Django2.x</code>
 
-项目尽量使用Django内部提供的API，后台管理为Django自带的管理系统django-admin。适合Django的小型实战项目。
+项目尽量使用Django内部提供的API，后台管理为Django自带的管理系统django-admin。
 
 ## 功能简介：
 
@@ -29,9 +29,17 @@
 ### 购物车
 ![cart](https://raw.githubusercontent.com/weilanhanf/Photos/master/DailyFresh/cart.png)
 
-## 安装：
+## 安装：（ “ * ”开头非必须）
 
-### 依赖包安装
+### Python环境部署
+
+项目基于 Python 3.8.10 开发
+
+1. 打开 Powershell
+2. 切换到项目目录
+3. 运行 <code>./.venv/bin/Activate.ps1</code> 激活虚拟环境
+
+#### *依赖包安装（虚拟环境内已部署，如无异常无需执行）
 
 下载文件进入项目目录之后，使用pip安装依赖包
 
@@ -43,7 +51,7 @@
 
 也可自行配置连接使用MySQL
 
-### 创建超级用户
+### *创建超级用户（已创建 用户名：admin 密码：qwer1234）
 
 终端下执行:
 
@@ -59,13 +67,4 @@
 
 浏览器打开: <code>http://127.0.0.1</code> 即可进入普通用户入口
 
-浏览器打开: <code>http://127.0.0.1/admin</code> 即可进入超级用户入口
-
-
-## 感谢：
-
-感谢您的star
-
-### 联系：
-
-如需联系请前往博客园留言 <a href="https://www.cnblogs.com/welan/p/9231530.html" target="_blank">链接</a>
+浏览器打开: <code>http://127.0.0.1/admin</code> 即可进入管理后台
