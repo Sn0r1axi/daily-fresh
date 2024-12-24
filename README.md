@@ -29,7 +29,7 @@
 ### 购物车
 ![cart](https://raw.githubusercontent.com/weilanhanf/Photos/master/DailyFresh/cart.png)
 
-## 安装：（ “ * ”开头非必须）
+## 安装：
 
 ### Python环境部署
 
@@ -37,9 +37,8 @@
 
 1. 打开 Powershell
 2. 切换到项目目录
-3. 运行 <code>./.venv/bin/Activate.ps1</code> 激活虚拟环境
 
-#### *依赖包安装（虚拟环境内已部署，如无异常无需执行）
+#### 依赖包安装
 
 下载文件进入项目目录之后，使用pip安装依赖包
 
